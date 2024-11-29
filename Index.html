@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #pdfViewer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Enter Your Confirmation Code</h2>
+    <form id="confirmationForm">
+        <input type="text" id="confirmationCode" placeholder="Enter your confirmation code" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="pdfViewer"></div>
+</div>
+
+<script>
+    // Define confirmation codes and their corresponding PDF links
+    const validCodes = {
+        "4L7QW3": "https://drive.google.com/file/d/1wrIEY4xp-Fh7ICsZQQK8kPqeWxD6ioAM/preview", // Example code with your PDF link
+        // Add other codes and PDF links as needed
+    };
+
+    // Handle form submission
+    document.getElementById('confirmationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const confirmationCode = document.getElementById('confirmationCode').value;
+        const pdfUrl = validCodes[confirmationCode];
+
+        if (pdfUrl) {
+            // Embed the PDF in an iframe
+            document.getElementById('pdfViewer').innerHTML = `<iframe src="${pdfUrl}" width="100%" height="500px"></iframe>`;
+        } else {
+            alert("Invalid confirmation code. Please try again.");
+        }
+    });
+</script>
+
+</body>
+</html>
